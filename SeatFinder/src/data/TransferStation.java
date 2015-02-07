@@ -12,8 +12,8 @@ public class TransferStation extends Station{
 		this.transferPassenger =0;
 	}
 	
-	public TransferStation(String name, int num, int[] passenger, int[] stair, int[] bound, int[] transStair, int transPass) {
-		super(name, num, passenger, stair, bound);
+	public TransferStation(int num, int[] passenger, int[] stair, int[] bound, int[] transStair, int transPass) {
+		super(num, passenger, stair, bound);
 		this.stair = transStair;
 		this.transferPassenger = transPass;
 	}

@@ -1,17 +1,15 @@
 package data;
 
 public class Station {
-	private String name;
 	private int num = 0;
-	private int[] passenger = new int[20];
+	private int[] passenger = new int[24];
 	private int[] stair = new int[4];
-	private int [] bound = new int[20];
+	private int [] bound = new int[24];
 	
 	
 	
 	
-	public Station(String name, int num, int[] passenger, int[] stair, int[] bound) {
-		this.name = name;
+	public Station(int num, int[] passenger, int[] stair, int[] bound) {
 		this.num = num;
 		this.passenger = passenger;
 		this.stair = stair;
@@ -19,19 +17,12 @@ public class Station {
 	}
 	
 	public Station(){
-		this.name = "";
 		this.num = 400;
 		this.passenger = null;
 		this.stair = null;
 		this.bound = null;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public int getNum() {
 		return num;
 	}
