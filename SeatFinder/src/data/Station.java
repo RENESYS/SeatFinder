@@ -1,15 +1,19 @@
 package data;
 
+import java.util.ArrayList;
+
+import manage.Define;
+
 public class Station {
 	private int num = 0;
-	private int[] passenger = new int[24];
-	private int[] stair = new int[4];
-	private int [] bound = new int[24];
+	private int[] passenger = new int[Define.HOUR];
+	private ArrayList<Integer> stair = new ArrayList<Integer>();
+	private int [] bound = new int[Define.HOUR];
 	
 	
 	
 	
-	public Station(int num, int[] passenger, int[] stair, int[] bound) {
+	public Station(int num, int[] passenger, ArrayList<Integer> stair, int[] bound) {
 		this.num = num;
 		this.passenger = passenger;
 		this.stair = stair;
@@ -35,10 +39,10 @@ public class Station {
 	public void setPassenger(int[] passenger) {
 		this.passenger = passenger;
 	}
-	public int[] getStair() {
+	public ArrayList<Integer> getStair() {
 		return stair;
 	}
-	public void setStair(int[] stair) {
+	public void setStair(ArrayList<Integer> stair) {
 		this.stair = stair;
 	}
 	public int[] getBound() {
