@@ -3,28 +3,20 @@ package data;
 import java.util.ArrayList;
 
 public class TransferSta extends Station{
-	private ArrayList<Integer>  stair;
+	private ArrayList<Integer> transferStair;
 	private int transferPassenger;
-	
-	
 	
 	public TransferSta() {
 		super();
-		this.stair = null;
-		this.transferPassenger =0;
+		this.transferStair = new ArrayList<Integer>();
+		this.transferPassenger = 0;
 	}
 	
-	public TransferSta(int num, int[] passenger, ArrayList<Integer> stair, int[] bound, ArrayList<Integer> transStair, int transPass) {
-		super(num, passenger, stair, bound);
-		this.stair = transStair;
-		this.transferPassenger = transPass;
+	public ArrayList<Integer> getTransferStair() {
+		return transferStair;
 	}
-	
-	public ArrayList<Integer> getStair() {
-		return stair;
-	}
-	public void setStair(ArrayList<Integer> stair) {
-		this.stair = stair;
+	public void setTransferStair(ArrayList<Integer> stair) {
+		this.transferStair = stair;
 	}
 	public int getTransferPassenger() {
 		return transferPassenger;

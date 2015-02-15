@@ -10,20 +10,35 @@
 </head>
 <body>
 <%
-	//ReadFile r = new ReadFile();
-	//r.init();
+	response.setCharacterEncoding("EUC_KR");
 	ServletContext context = getServletContext();
 	String path = context.getRealPath("/");
-	ArrayList<Station> aa = Manager.manager(path);
-	int n = aa.get(0).getNum();
-	int m = aa.get(10).getBound()[10];
-	int nn = aa.get(11).getStair().get(2);
-	//int n = 10;
+	
+	
+	ArrayList<Station> aa = Manager.manager(request, response, path);
+	String na = aa.get(2).getName();
+	int n = aa.get(2).getNum();
+	int m = aa.get(2).getBound()[10];
+	int nn = aa.get(2).getStair().get(2);
+	int o = 0;
+	int oo = 0;
+	if( aa.get(2) instanceof TransferSta){
+		TransferSta ss = (TransferSta)aa.get(2);
+		o = ss.getTransferPassenger();
+		oo = ss.getTransferStair().get(1);
+	}
+	int rr = aa.get(3).getGetOn()[10];
+	int r = aa.get(3).getGetOff()[23];
 %>
 
 <h2><%=n %></h2>
 <h3><%=m %></h3>
 <h1><%= nn %></h1>
+<h2><%=o %></h2>
+<h3><%=oo %></h3>
+<h1><%= na %></h1>
+<h2><%=r %></h2>
+<h2><%=rr %></h2>
 
 </body>
 </html>
