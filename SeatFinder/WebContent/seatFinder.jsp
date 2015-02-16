@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>SeatFinder v0.1</title>
 </head>
 <body>
 <%
@@ -16,20 +16,32 @@
 	
 	
 	ArrayList<Station> aa = Manager.manager(request, response, path);
-	String na = aa.get(2).getName();
-	int n = aa.get(2).getNum();
-	int m = aa.get(2).getBound()[10];
-	int nn = aa.get(2).getStair().get(2);
+	String na = aa.get(24).getName();
+	int n = aa.get(24).getNum();
+	int m = aa.get(24).getBound()[10];
+	int nn = aa.get(24).getStair().get(2);
 	int o = 0;
 	int oo = 0;
-	if( aa.get(2) instanceof TransferSta){
-		TransferSta ss = (TransferSta)aa.get(2);
+	if( aa.get(24) instanceof TransferSta){
+		TransferSta ss = (TransferSta)aa.get(24);
 		o = ss.getTransferPassenger();
 		oo = ss.getTransferStair().get(1);
 	}
-	int rr = aa.get(3).getGetOn()[10];
-	int r = aa.get(3).getGetOff()[23];
+	int r = aa.get(24).getGetOff()[23];
 %>
+
+ <form name="searchForm" action="" method="get">
+       <p>
+           <select name="searchType">
+               <option value="ALL">전체검색</option>
+               <option value="SUBJECT">제목</option>
+               <option value="WRITER">작성자</option>
+               <option value="CONTENTS">내용</option>
+           </select>
+           <input type="text" name="searchText" value="" />
+           <input type="submit" value="검색" />
+       </p>
+</form>
 
 <h2><%=n %></h2>
 <h3><%=m %></h3>
@@ -38,7 +50,16 @@
 <h3><%=oo %></h3>
 <h1><%= na %></h1>
 <h2><%=r %></h2>
-<h2><%=rr %></h2>
+<% for(int i = 0; i < 24; i++){
+	int[] arr = aa.get(3).getCongetstion()[i].getCrowd();
+	for(int e : arr){
+%>
+<%=e%>
+<%}
+%>
+<p></p>
+<%}%>
+
 
 </body>
 </html>

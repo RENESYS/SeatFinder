@@ -11,17 +11,9 @@ public class Station {
 	private int[] getOff;
 	private ArrayList<Integer> stair;
 	private int [] bound;
+	private Train[] congetstion;
 	
 
-	public Station(String name, int num, int[] getOn, int[] getOff, ArrayList<Integer> stair, int[] bound) {
-		this.name = name;
-		this.num = num;
-		this.getOn = getOn;
-		this.getOff = getOff;
-		this.stair = stair;
-		this.bound = bound;
-	}
-	
 	public Station(){
 		this.name = "a";
 		this.num = 400;
@@ -29,6 +21,10 @@ public class Station {
 		this.getOff = new int[Define.HOUR];
 		this.stair = new ArrayList<Integer>();
 		this.bound = new int[Define.HOUR];
+		this.congetstion = new Train[Define.HOUR];
+		for(int i = 0; i < Define.HOUR; i++){
+			this.congetstion[i] = new Train();
+		}
 	}
 	
 	
@@ -57,7 +53,6 @@ public class Station {
 	public void setGetOff(int[] getOff) {
 		this.getOff = getOff;
 	}
-
 	public ArrayList<Integer> getStair() {
 		return stair;
 	}
@@ -70,4 +65,11 @@ public class Station {
 	public void setBound(int[] bound) {
 		this.bound = bound;
 	}
+	public Train[] getCongetstion() {
+		return congetstion;
+	}
+	public void setCongetstion(Train[] congetstion) {
+		this.congetstion = congetstion;
+	}
+	
 }

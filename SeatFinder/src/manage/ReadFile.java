@@ -62,11 +62,11 @@ public class ReadFile extends HttpServlet{
 				exitFile.close();
 			}catch(IOException e){}
 		}
-		
 		return stations;
 	}
 	
 	
+	//read transfer data from text file
 	public ArrayList<Station> readTransfer(String path, ArrayList<Station> sta){
 		try{
 			transferFile = new BufferedReader(new FileReader(path + "/transfer.txt"));
@@ -102,20 +102,17 @@ public class ReadFile extends HttpServlet{
 	}
 	
 	
-	public void readJson(HttpServletRequest req, HttpServletResponse res, String path, ArrayList<Station> sta){
+	//read passengers in hour data from json file
+	public void readJson(String path, ArrayList<Station> sta){
 		try{
-			req.setCharacterEncoding("euc-kr");
-			res.setContentType("text/html; charset=euc-kr");
-			
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(new FileReader(path + "/passengers.json"));
 			JSONObject jo = (JSONObject)obj;
 			JSONArray arr = (JSONArray)jo.get("DATA");
 			String jsonPath;
-			PrintWriter out = res.getWriter();
 			StringTokenizer st;
 			
-			for(int i = 0; i < 48; i+=2){
+			for(int i = 0; i < (Define.STATIONNUM * 2); i+=2){
 				JSONObject jo1 = (JSONObject)arr.get(i);
 				JSONObject jo2 = (JSONObject)arr.get(i+1);
 				for(int j = 0; j < Define.HOUR; j++){
