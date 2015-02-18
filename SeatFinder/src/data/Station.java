@@ -17,7 +17,7 @@ public class Station {
 	public Station(){
 		this.name = "a";
 		this.num = 400;
-		this.getOn = new int[Define.HOUR];
+		this.getOn = new int[Define.HOUR + 1];
 		this.getOff = new int[Define.HOUR];
 		this.stair = new ArrayList<Integer>();
 		this.bound = new int[Define.HOUR];

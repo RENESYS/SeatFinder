@@ -28,8 +28,8 @@ public class ReadFile extends HttpServlet{
 	
 	public ArrayList<Station> readStation(String path, ArrayList<Station> stations){
 		try{
-			boundFile = new BufferedReader(new FileReader(path + "/bound.txt"));
-			exitFile = new BufferedReader(new FileReader(path + "/exit.txt"));
+			boundFile = new BufferedReader(new FileReader(path + "/file/bound.txt"));
+			exitFile = new BufferedReader(new FileReader(path + "/file/exit.txt"));
 			String type;
 			Station sta = null;
 			
@@ -69,7 +69,7 @@ public class ReadFile extends HttpServlet{
 	//read transfer data from text file
 	public ArrayList<Station> readTransfer(String path, ArrayList<Station> sta){
 		try{
-			transferFile = new BufferedReader(new FileReader(path + "/transfer.txt"));
+			transferFile = new BufferedReader(new FileReader(path + "/file/transfer.txt"));
 			ArrayList<Integer> tempTransStair = new ArrayList<Integer>();
 			int stationNum = 400;
 			int num = 0;
@@ -106,15 +106,22 @@ public class ReadFile extends HttpServlet{
 	public void readJson(String path, ArrayList<Station> sta){
 		try{
 			JSONParser parser = new JSONParser();
-			Object obj = parser.parse(new FileReader(path + "/passengers.json"));
+			Object obj = parser.parse(new FileReader(path + "/file/passengers.json"));
 			JSONObject jo = (JSONObject)obj;
 			JSONArray arr = (JSONArray)jo.get("DATA");
 			String jsonPath;
 			StringTokenizer st;
+			int staNum;
 			
 			for(int i = 0; i < (Define.STATIONNUM * 2); i+=2){
 				JSONObject jo1 = (JSONObject)arr.get(i);
 				JSONObject jo2 = (JSONObject)arr.get(i+1);
+				
+				String s = (String) jo1.get("STN_NM");
+				st = new StringTokenizer(s, "^([\\d])$");
+				st.nextToken();
+				staNum = Integer.parseInt(st.nextToken()) - 409;
+				
 				for(int j = 0; j < Define.HOUR; j++){
 					if(j < 9)
 						jsonPath = "FROM0" + j + "TO0" + (j+1);
@@ -123,14 +130,10 @@ public class ReadFile extends HttpServlet{
 					else
 						jsonPath = "FROM" + j + "TO" + (j+1);
 					
-				String s = (String) jo1.get("STN_NM");
-				st = new StringTokenizer(s, "^([\\d])$");
-				st.nextToken();
-				int staNum = Integer.parseInt(st.nextToken()) - 409;
-				
 				sta.get(staNum).getGetOn()[j] = Integer.parseInt( (String)jo1.get(jsonPath) );
 				sta.get(staNum).getGetOff()[j] = Integer.parseInt( (String)jo2.get(jsonPath) );
 				}
+				sta.get(staNum).getGetOn()[24] = Integer.parseInt( (String)jo1.get("TOT") );
 			}	
 		}catch(IOException e){} 
 		catch (ParseException e) {

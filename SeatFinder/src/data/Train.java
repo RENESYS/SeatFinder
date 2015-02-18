@@ -4,7 +4,6 @@ public class Train {
 	private int[] crowd;
 	
 	public Train(){
-		//System.out.println("aa");
 		crowd = new int[10];
 	}
 
