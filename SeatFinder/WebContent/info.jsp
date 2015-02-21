@@ -1,3 +1,4 @@
+<%@page import="manage.*" import="java.util.*" import="data.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>SeatFinder v0.2</title>
+    <title>SeatFinder v0.2 - Train Congestion Analyzer</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -24,9 +25,8 @@
 	</style>
 </head>
 <body>
-
-<script type="text/javascript" src="event.js"> </script>
-<script type="text/javascript">
+	<script type="text/javascript" src="event.js"> </script>
+	<script type="text/javascript">
 	// a Generic function to associate the event handler with a function
 	function catchEvent(eventObj, event, eventHandler) {
 		if (eventObj.addEventListener)
@@ -38,11 +38,11 @@
 		else
 			alert("error");
 	}
-	catchEvent(window, "load", createButtons);
-	window.onresize = function(){resizeButtons()}
-</script>
+	
+	catchEvent(window, "load", showCarInfo);
+	</script>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,11 +50,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SeatFinder v0.2</a>
+          <a class="navbar-brand" href="seatFinder.jsp">SeatFinder v0.2</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="seatFinder.jsp">Home</a></li>
             <li><a href="#about">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -62,36 +62,40 @@
     </div>
 
     <div class="container">
-        <h3>원하시는 역을 선택하세요</h3>
-        <img src = "img/line4.png" id ="map">
-		 <form name="setting" action="info.jsp" method="get">
-		       <p>
-		       		<input type="text" name="staNum" id = "hour" value="" />
-		           <select name="hour">
-		               <option value="4">04시</option>
-		               <option value="5">05시</option>
-		               <option value="6">06시</option>
-		               <option value="7">07시</option>
-		               <option value="8">08시</option>
-		               <option value="9">09시</option>
-		               <option value="10">10시</option>
-		               <option value="11">11시</option>
-		               <option value="12">12시</option>
-		               <option value="13">13시</option>
-		               <option value="14">14시</option>
-		               <option value="15">15시</option>
-		               <option value="16">16시</option>
-		               <option value="17">17시</option>
-		               <option value="18">18시</option>
-		               <option value="19">19시</option>
-		               <option value="20">20시</option>
-		               <option value="21">21시</option>
-		               <option value="22">22시</option>
-		               <option value="23">23시</option> 
-		           </select>
-		           <input type="submit" value="검색" />
-		       </p>
-		</form>
+        <%
+		ServletContext context = getServletContext();
+		String path = context.getRealPath("/");
+		request.setCharacterEncoding("UTF-8");
+		
+		Manager main = new Manager();
+		ArrayList<Station> sta = main.initialize(request, response, path);
+	
+		String name = request.getParameter("staNum");
+		int num = main.getStationNum(sta, name);
+		int hour = Integer.parseInt(request.getParameter("hour"));
+		int[] train = main.getTrainCongestion(sta, num, hour);
+		%>
+		
+		<h2><%=name %>역 <%=hour %>시 하행열차 혼잡도입니다.</h2>
+		<h3></h3>
+		<div id = "passenger"></div>
+		<%
+		for(int i = 0; i < 10; i++){
+			String id = "" + i;
+			if(train[i] < 50){
+				%>
+			<img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width = 80>
+			<%continue;}
+			if(train[i] >= 50 && train[i] < 100){
+				%>
+			<img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width = 80>
+			<%continue;}
+			if(train[i] >= 100){
+				%>
+			<img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width = 80>
+			<%}
+		}
+	%>
     </div><!-- /.container -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
