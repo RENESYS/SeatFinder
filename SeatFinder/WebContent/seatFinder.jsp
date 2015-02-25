@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>SeatFinder v0.2</title>
+    <title>SeatFinder v0.5</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -20,6 +20,10 @@
 		body {
 			padding-top: 60px; 
 			/* 60px to make the container go all the way to the bottom of the topbar */
+		}
+		th.station, td.station{
+			border : 5px solid;
+			border-color : #0099ff; 
 		}
 	</style>
 </head>
@@ -50,7 +54,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SeatFinder v0.2</a>
+          <a class="navbar-brand" href="#">SeatFinder v0.5</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -63,34 +67,45 @@
 
     <div class="container">
         <h3>원하시는 역을 선택하세요</h3>
-        <img src = "img/line4.png" id ="map">
-		 <form name="setting" action="info.jsp" method="get">
-		       <p>
-		       		<input type="text" name="staNum" id = "hour" value="" />
-		           <select name="hour">
-		               <option value="4">04시</option>
-		               <option value="5">05시</option>
-		               <option value="6">06시</option>
-		               <option value="7">07시</option>
-		               <option value="8">08시</option>
-		               <option value="9">09시</option>
-		               <option value="10">10시</option>
-		               <option value="11">11시</option>
-		               <option value="12">12시</option>
-		               <option value="13">13시</option>
-		               <option value="14">14시</option>
-		               <option value="15">15시</option>
-		               <option value="16">16시</option>
-		               <option value="17">17시</option>
-		               <option value="18">18시</option>
-		               <option value="19">19시</option>
-		               <option value="20">20시</option>
-		               <option value="21">21시</option>
-		               <option value="22">22시</option>
-		               <option value="23">23시</option> 
-		           </select>
-		           <input type="submit" value="검색" />
-		       </p>
+        <img src="img/line4.png" id ="map">
+		<form name="setting" action="info.jsp" method="get">
+			<table align=center>
+				<tr class="station">
+					<td class="station" align=center colspan=2>
+						<input type="hidden" name="staNum" id ="station" value="" />
+						<img src="img/sta/default.png" id="sta">
+					</td>
+				</tr>
+				<tr>
+					<td align=center width=300>
+						<select name="hour">
+							<option>원하는 시간대를 선택하세요</option>
+			               <option value="5">05시</option>
+			               <option value="6">06시</option>
+			               <option value="7">07시</option>
+			               <option value="8">08시</option>
+			               <option value="9">09시</option>
+			               <option value="10">10시</option>
+			               <option value="11">11시</option>
+			               <option value="12">12시</option>
+			               <option value="13">13시</option>
+			               <option value="14">14시</option>
+			               <option value="15">15시</option>
+			               <option value="16">16시</option>
+			               <option value="17">17시</option>
+			               <option value="18">18시</option>
+			               <option value="19">19시</option>
+			               <option value="20">20시</option>
+			               <option value="21">21시</option>
+			               <option value="22">22시</option>
+			               <option value="23">23시</option> 
+			           </select>
+					</td>
+					<td align=center width=300>
+						<button type="summit" class="btn btn-sm btn-success">검색</button>
+					</td>
+				</tr>
+			</table>
 		</form>
     </div><!-- /.container -->
 

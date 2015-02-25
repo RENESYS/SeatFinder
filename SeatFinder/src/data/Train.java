@@ -1,10 +1,12 @@
 package data;
 
+import manage.Define;
+
 public class Train {
 	private int[] crowd;
 	
 	public Train(){
-		crowd = new int[10];
+		crowd = new int[Define.CARNUM];
 	}
 
 	public int[] getCrowd() {

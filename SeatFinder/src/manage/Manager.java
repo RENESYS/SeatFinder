@@ -21,16 +21,12 @@ public class Manager implements ICongestion{
 		rw.readJson(path, stations);
 		
 		calc.calcCongestion(stations);
-	
-		//stations.add(new Station());
 		return stations;
 	}
 	
 	public int getStationNum(ArrayList<Station> sta, String name){
 		int num = 0;
-		System.out.println(name);
 		for(int i = 0; i < sta.size(); i++){
-			System.out.println(sta.get(i).getName());
 			if(sta.get(i).getName().equals(name))
 				num = i;
 		}

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>SeatFinder v0.2 - Train Congestion Analyzer</title>
+    <title>SeatFinder v0.5 - Train Congestion Analyzer</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -50,7 +50,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="seatFinder.jsp">SeatFinder v0.2</a>
+          <a class="navbar-brand" href="seatFinder.jsp">SeatFinder v0.5</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -70,32 +70,34 @@
 		Manager main = new Manager();
 		ArrayList<Station> sta = main.initialize(request, response, path);
 	
-		String name = request.getParameter("staNum");
-		int num = main.getStationNum(sta, name);
+		int staNum = Integer.parseInt(request.getParameter("staNum")) - 409;
+		String name = sta.get(staNum).getName();
 		int hour = Integer.parseInt(request.getParameter("hour"));
-		int[] train = main.getTrainCongestion(sta, num, hour);
+		int[] train = main.getTrainCongestion(sta, staNum, hour);
 		%>
 		
-		<h2><%=name %>역 <%=hour %>시 하행열차 혼잡도입니다.</h2>
-		<h3></h3>
+		<div class="alert alert-success"><b><%=name %>역 <%=hour %>시</b> 하행열차 혼잡도입니다.</div>
+		</br>
 		<div id = "passenger"></div>
 		<%
 		for(int i = 0; i < 10; i++){
 			String id = "" + i;
 			if(train[i] < 50){
 				%>
-			<img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width = 80>
+			<img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width=80>
 			<%continue;}
 			if(train[i] >= 50 && train[i] < 100){
 				%>
-			<img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width = 80>
+			<img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width=80>
 			<%continue;}
 			if(train[i] >= 100){
 				%>
-			<img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width = 80>
+			<img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width=80>
 			<%}
 		}
 	%>
+	</br></br>
+	<div class="alert alert-danger"> 그림 위에 마우스를 올리시면 각 열차 칸의 정보를 볼 수 있습니다.</div>
     </div><!-- /.container -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

@@ -6,53 +6,52 @@ import data.Station;
 import data.TransferSta;
 
 public class Calculate {
-	private double[] percent = {0.1, 0.2, 0.4, 0.2, 0.1}; 
 	
 	public void calcCongestion(ArrayList<Station> sta){
 		double[] platform;
-		int[] cars = {0,0,0,0,0,0,0,0,0,0};
+		double[] transPlatform = new double[Define.CARNUM];
+		int[] interval = {0, 0, 0, 0, 0, 5, 6, 9, 10, 10, 6, 5, 6, 
+				6, 5, 6, 5, 7, 8, 8, 7, 6, 5, 4};	//train per hour
 		
 		for(int i = 0; i < Define.STATIONNUM; i++){
-			double[] transPlatform = {0,0,0,0,0,0,0,0,0,0};
-			for(int hour = 4; hour < Define.HOUR; hour++){
-				int getOnPassenger = sta.get(i).getGetOn()[hour] / 6;
-				int getOffPassenger = sta.get(i).getGetOff()[hour] / 6;
-				int passengerOfStair = getOnPassenger / sta.get(i).getStair().size();
+			Station station = sta.get(i);
+			
+			for(int hour = 5; hour < Define.HOUR; hour++){
+				int[] cars = {0,0,0,0,0,0,0,0,0,0};
+				int getOnPassenger = station.getGetOn()[hour] / interval[hour];
+				int getOffPassenger = station.getGetOff()[hour] / interval[hour];
+				int passengerOfStair = getOnPassenger / station.getStair().size();
 				//calculate passengers on platform
-				platform = calcPlatformCongest(passengerOfStair, sta.get(i).getStair());
-				if(sta.get(i) instanceof TransferSta){
-					int trans = ((TransferSta)sta.get(i)).getTransferPassenger() * (sta.get(i).getGetOn()[hour] / sta.get(i).getGetOn()[24]);
-					transPlatform = calcPlatformCongest(trans,  ((TransferSta)sta.get(i)).getTransferStair());
+				platform = calcPlatformCongest(passengerOfStair, station.getStair());
+				if(station instanceof TransferSta){
+					double transferPerHour = station.getGetOn()[hour] / station.getGetOn()[24];
+					double trans = ((TransferSta)station).getTransferPassenger() * transferPerHour;
+					transPlatform = calcPlatformCongest((int)trans,  ((TransferSta)station).getTransferStair());
 				}
 				//calculate passengers on each cars
 				if(i != 0){
 					cars = sta.get(i-1).getCongetstion()[hour].getCrowd();
 					for(int car = 0; car < 10; car++){
-						cars[car] += ((int)platform[car] + (int)transPlatform[car] - (getOffPassenger / 20));
+						cars[car] += ( (int)(platform[car] + transPlatform[car] - (getOffPassenger / 20)) );
 						if(cars[car] < 0)
 							cars[car] = 0;
 					}	
 				}
-				for(int x = 0; x <10; x++){
-					sta.get(i).getCongetstion()[hour].getCrowd()[x] = cars[x];
+				//put the result in the Station instance
+				cars = modifyCars(cars);
+				for(int carNum = 0; carNum <Define.CARNUM; carNum++){
+					sta.get(i).getCongetstion()[hour].getCrowd()[carNum] = cars[carNum];
 				}
 			}
 		}
-		
-		/*
-		for(int i = 0; i < 25; i++){
-			int[] temp = sta.get(i).getCongetstion()[7].getCrowd();
-			for(int e : temp)
-				System.out.print(e + " ");
-			System.out.println(sta.get(i).getName());
-		}
-		*/
 	}
 	
 	//calculate passengers on each cars
 	public double[] calcPlatformCongest(int passengers, ArrayList<Integer> stairs){
-		double[] temp = new double[10]; 
+		double[] percent = {0.1, 0.2, 0.4, 0.2, 0.1};
+		double[] temp = new double[Define.CARNUM]; 
 		double[] passPercent = new double[5];
+		
 		for(int i = 0; i < 5; i++){
 			passPercent[i] = (passengers * percent[i]);
 		}
@@ -70,4 +69,19 @@ public class Calculate {
 		return temp;
 	}
 	
+	public int[] modifyCars(int[] car){
+		for(int i = 0; i < 9; i++){
+			if(car[i] > car[i+1] + 30){
+				car[i] -= 15;
+				car[i+1] += 15;
+			}
+		}
+		for(int i = 9; i > 0; i--){
+			if(car[i] > car[i-1] + 30){
+				car[i] -= 15;
+				car[i-1] += 15;
+			}
+		}
+		return car;
+	}
 }
