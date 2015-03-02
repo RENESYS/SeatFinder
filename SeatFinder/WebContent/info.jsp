@@ -68,7 +68,7 @@
 		request.setCharacterEncoding("UTF-8");
 		
 		Manager main = new Manager();
-		ArrayList<Station> sta = main.initialize(request, response, path);
+		ArrayList<Station> sta = main.initialize(path);
 	
 		int staNum = Integer.parseInt(request.getParameter("staNum")) - 409;
 		String name = sta.get(staNum).getName();

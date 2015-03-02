@@ -19,7 +19,7 @@ import org.json.simple.parser.ParseException;
 import data.Station;
 import data.TransferSta;
 
-public class ReadFile extends HttpServlet{
+public class ReadFile{
 	
 	BufferedReader boundFile;
 	BufferedReader exitFile;

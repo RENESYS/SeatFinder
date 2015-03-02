@@ -1,22 +1,19 @@
 
-	var id = ["409", "410", "411", "412", "413", "414", "415", "416", "417", "418", "419",
-	          "420", "421", "422", "423", "424", "425", "426", "427", "428", "429", "430", "431", "432", "433"];
 	var onTop = [200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 
 	           200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 177, 133, 88];
 	var left = [30, 69, 104, 143, 185, 223, 260, 295, 335, 375, 408,
 	            447, 482, 521, 563, 598, 640, 680, 713, 750, 785, 817, 865, 885, 868];
-
+	var stationNum = 409;
 
 function createButtons(){
-	
 	var map = document.getElementById("map");
-	
+
 	for(var i = 0; i < 25; i++){
 		var btn = document.createElement("button");
 		var div = document.getElementById("buttonPosition");
-	    btn.id = id[i];
+	    btn.id =stationNum + i;
 	    document.body.appendChild(btn);
-	    var btnClick = document.getElementById(id[i]);
+	    var btnClick = document.getElementById(stationNum + i);
 	    
 	    btnClick.style.position = "absolute";
 	    btnClick.style.height = "20px";
@@ -32,7 +29,7 @@ function resizeButtons(){
 	var map = document.getElementById("map");
 	
 	for(var i = 0; i < 25; i++){
-		var btn = document.getElementById(id[i]);
+		var btn = document.getElementById(stationNum + i);
 		btn.style.position = "absolute";
 		btn.style.left = left[i] + map.offsetLeft - 10 + "px";
 		btn.style.top = onTop[i] + map.offsetTop - 7 + "px";
@@ -58,7 +55,7 @@ function showCarInfo(){
 function infoStart(event){
 	var info = document.getElementById("passenger");
 	info.style.visibility = "visible";
-	info.innerHTML = "현재 열차 칸 : " + (Number(this.id) + 1) + "량</br>예상 승객 수 : " + this.name;
+	info.innerHTML = "현재 열차 : " + (Number(this.id) + 1) + "량</br>예상 승객 수 : " + this.name;
 	
 	info.style.position = "absolute";
 	info.style.left = event.x + "px";

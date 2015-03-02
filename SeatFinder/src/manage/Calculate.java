@@ -9,30 +9,32 @@ public class Calculate {
 	
 	public void calcCongestion(ArrayList<Station> sta){
 		double[] platform;
-		double[] transPlatform = new double[Define.CARNUM];
+		double[] transPlatform;
 		int[] interval = {0, 0, 0, 0, 0, 5, 6, 9, 10, 10, 6, 5, 6, 
 				6, 5, 6, 5, 7, 8, 8, 7, 6, 5, 4};	//train per hour
+		int[] cars;
 		
 		for(int i = 0; i < Define.STATIONNUM; i++){
 			Station station = sta.get(i);
+			transPlatform = new double[Define.CARNUM];
 			
 			for(int hour = 5; hour < Define.HOUR; hour++){
-				int[] cars = {0,0,0,0,0,0,0,0,0,0};
-				int getOnPassenger = station.getGetOn()[hour] / interval[hour];
-				int getOffPassenger = station.getGetOff()[hour] / interval[hour];
-				int passengerOfStair = getOnPassenger / station.getStair().size();
-				//calculate passengers on platform
-				platform = calcPlatformCongest(passengerOfStair, station.getStair());
+				cars = new int[Define.CARNUM];
+				double getOnPassenger = station.getGetOn()[hour] / interval[hour];
+				double getOffPassenger = station.getGetOff()[hour] / interval[hour];
+				double passengerOfStair = getOnPassenger / station.getStair().size();
+				
+				platform = calcPlatformCongest((int)passengerOfStair, station.getStair());
 				if(station instanceof TransferSta){
-					double transferPerHour = station.getGetOn()[hour] / station.getGetOn()[24];
-					double trans = ((TransferSta)station).getTransferPassenger() * transferPerHour;
+					double transferRate = station.getGetOn()[hour] / station.getGetOn()[24];
+					double trans = ((TransferSta)station).getTransferPassenger() * transferRate;
 					transPlatform = calcPlatformCongest((int)trans,  ((TransferSta)station).getTransferStair());
 				}
 				//calculate passengers on each cars
 				if(i != 0){
 					cars = sta.get(i-1).getCongetstion()[hour].getCrowd();
 					for(int car = 0; car < 10; car++){
-						cars[car] += ( (int)(platform[car] + transPlatform[car] - (getOffPassenger / 20)) );
+						cars[car] += ( (int)(platform[car] + transPlatform[car] - (getOffPassenger / 40)) );
 						if(cars[car] < 0)
 							cars[car] = 0;
 					}	
@@ -69,6 +71,7 @@ public class Calculate {
 		return temp;
 	}
 	
+	//arrange some passengers in the car
 	public int[] modifyCars(int[] car){
 		for(int i = 0; i < 9; i++){
 			if(car[i] > car[i+1] + 30){

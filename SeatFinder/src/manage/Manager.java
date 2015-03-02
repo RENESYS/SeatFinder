@@ -10,7 +10,7 @@ import data.Train;
 
 public class Manager implements ICongestion{
 	
-	public static ArrayList<Station> initialize(HttpServletRequest req, HttpServletResponse res, String path){
+	public static ArrayList<Station> initialize(String path){
 		ArrayList<Station> stations = new ArrayList<Station>();
 		Train[] trains = new Train[Define.STATIONNUM];
 		ReadFile rw = new ReadFile();

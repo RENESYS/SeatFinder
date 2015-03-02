@@ -79,7 +79,7 @@
 				<tr>
 					<td align=center width=300>
 						<select name="hour">
-							<option>원하는 시간대를 선택하세요</option>
+							<option disabled>원하는 시간대를 선택하세요</option>
 			               <option value="5">05시</option>
 			               <option value="6">06시</option>
 			               <option value="7">07시</option>
