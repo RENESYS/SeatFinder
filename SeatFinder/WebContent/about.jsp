@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>SeatFinder v0.9 - Train Congestion Analyzer</title>
+    <title>SeatFinder v0.9 - present</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -25,23 +25,6 @@
 	</style>
 </head>
 <body>
-	<script type="text/javascript" src="event.js"> </script>
-	<script type="text/javascript">
-	// a Generic function to associate the event handler with a function
-	function catchEvent(eventObj, event, eventHandler) {
-		if (eventObj.addEventListener)
-	                eventObj.addEventListener(event, eventHandler, false);
-		else if (eventObj.attachEvent) {
-	                event = "on" + event;
-	                eventObj.attachEvent(event, eventHandler);
-		}
-		else
-			alert("error");
-	}
-	
-	catchEvent(window, "load", showCarInfo);
-	</script>
-
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -62,42 +45,9 @@
     </div>
 
     <div class="container">
-        <%
-		ServletContext context = getServletContext();
-		String path = context.getRealPath("/");
-		request.setCharacterEncoding("UTF-8");
-		
-		Manager main = new Manager();
-		ArrayList<Station> sta = main.initialize(path);
-	
-		int staNum = Integer.parseInt(request.getParameter("staNum")) - 409;
-		String name = sta.get(staNum).getName();
-		int hour = Integer.parseInt(request.getParameter("hour"));
-		int[] train = main.getTrainCongestion(sta, staNum, hour);
-		%>
-		
-		<div class="alert alert-success"><b><%=name %>역 <%=hour %>시</b> 하행열차 혼잡도입니다.</div>
-		</br>
-		<div id = "passenger"></div>
-		<%
-		for(int i = 0; i < 10; i++){
-			String id = "" + i;
-			if(train[i] < 50){
-				%>
-			<img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width=80>
-			<%continue;}
-			if(train[i] >= 50 && train[i] < 100){
-				%>
-			<img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width=80>
-			<%continue;}
-			if(train[i] >= 100){
-				%>
-			<img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width=80>
-			<%}
-		}
-	%>
-	</br></br>
-	<div class="alert alert-danger"> 열차 그림을 클릭하시면 각 열차 칸의 정보를 볼 수 있습니다.</div>
+        <img src="img/profile.png" width=250 class="img-rounded">
+        <h2>SeatFinder</h2></br>
+        <h4>RENESYS - hrs350x@naver.com</h4></br>
     </div><!-- /.container -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

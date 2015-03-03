@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>SeatFinder v0.5</title>
+    <title>SeatFinder v0.9</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
@@ -54,12 +54,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SeatFinder v0.5</a>
+          <a class="navbar-brand" href="#">SeatFinder v0.9</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="about.jsp">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -67,7 +67,8 @@
 
     <div class="container">
         <h3>원하시는 역을 선택하세요</h3>
-        <img src="img/line4.png" id ="map">
+        <div class="alert alert-danger"> 현재 <b>당고개 ~ 사당</b>구간만 서비스 중입니다.</div>
+        <img src="img/line4.png" id ="map" align=center>
 		<form name="setting" action="info.jsp" method="get">
 			<table align=center>
 				<tr class="station">
