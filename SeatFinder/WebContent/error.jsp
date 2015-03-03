@@ -1,6 +1,6 @@
-<%@page import="manage.*" import="java.util.*" import="data.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page isErrorPage="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,10 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
-
-    <title>SeatFinder v0.9 - present</title>
-
-    <!-- Bootstrap core CSS -->
+	<title>SeatFinder v0.9 - ERROR :(</title>
+ <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -45,13 +43,25 @@
     </div>
 
     <div class="container">
-        <img src="img/profile.png" width=180 class="img-rounded">
-        <address>
-		  <h4>SeatFinder</h4></br>
-		  Project Manager : RENESYS</br>
-		  
-		  E-mail  : <a href="hrs350x@naver.com">hrs350x@naver.com</a>
-		</address>
+    <table>
+    	<tr>
+    		<td>
+    			<div class="panel panel-danger">
+			        <div class="panel-heading">
+			          <h2 class="panel-title"><b>에러가 발생했습니다!</b></h2>
+			        </div>
+			        <div class="panel-body">
+			        <img src ="img/error.jpg" class="img-thumbnail" width=400>
+			          <div class="alert alert-warning">혹시 이런 실수를 하지 않으셨나요?</div></br>
+			          <p class="text-danger">※ 노선도에서 역을 클릭하지 않았습니다.</p>
+			          </br>
+			          </br>
+			          <p>다시 하려면 상단의 Home 탭이나 뒤로 가기를 누르세요.</p>
+			        </div>
+      			</div>
+    		</td>
+    	</tr>
+    </table>
     </div><!-- /.container -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

@@ -22,7 +22,7 @@
 			/* 60px to make the container go all the way to the bottom of the topbar */
 		}
 		th.station, td.station{
-			border : 5px solid;
+			border : 3px solid;
 			border-color : #0099ff; 
 		}
 	</style>
@@ -66,8 +66,8 @@
     </div>
 
     <div class="container">
-        <h3>원하시는 역을 선택하세요</h3>
-        <div class="alert alert-danger"> 현재 <b>당고개 ~ 사당</b>구간만 서비스 중입니다.</div>
+        <h3>원하는 역을 선택하세요</h3>
+        <div class="alert alert-danger"> 현재 <b>당고개 ~ 사당</b> 구간만 서비스 중입니다.</div>
         <img src="img/line4.png" id ="map" align=center>
 		<form name="setting" action="info.jsp" method="get">
 			<table align=center>

@@ -102,7 +102,7 @@ public class ReadFile{
 	}
 	
 	
-	//read passengers in hour data from json file
+	//read passengers per hour data from json file
 	public void readJson(String path, ArrayList<Station> sta){
 		try{
 			JSONParser parser = new JSONParser();

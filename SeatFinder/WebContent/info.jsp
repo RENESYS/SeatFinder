@@ -1,6 +1,7 @@
 <%@page import="manage.*" import="java.util.*" import="data.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page errorPage = "error.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -79,23 +80,26 @@
 		<div class="alert alert-success"><b><%=name %>역 <%=hour %>시</b> 하행열차 혼잡도입니다.</div>
 		</br>
 		<div id = "passenger"></div>
-		<%
-		for(int i = 0; i < 10; i++){
-			String id = "" + i;
-			if(train[i] < 50){
+		<table>
+			<tr>
+			<%
+			for(int i = 0; i < 10; i++){
+				String id = "" + i;
+				if(train[i] < 50){
 				%>
-			<img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width=80>
-			<%continue;}
-			if(train[i] >= 50 && train[i] < 100){
+					<td><img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width=80></td>
+				<%continue;}
+				if(train[i] >= 50 && train[i] < 100){
 				%>
-			<img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width=80>
-			<%continue;}
-			if(train[i] >= 100){
+					<td><img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width=80></td>
+				<%continue;}
+				if(train[i] >= 100){
 				%>
-			<img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width=80>
-			<%}
-		}
-	%>
+					<td><img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width=80></td>
+				<%}
+			}%>
+		</tr>
+	</table>
 	</br></br>
 	<div class="alert alert-danger"> 열차 그림을 클릭하시면 각 열차 칸의 정보를 볼 수 있습니다.</div>
     </div><!-- /.container -->

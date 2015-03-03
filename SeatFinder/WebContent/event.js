@@ -48,7 +48,6 @@ function showCarInfo(){
 	for(var i = 0; i < 10; i++){
 		var car = document.getElementById(""+i);
 		car.addEventListener("click", infoStart, false);
-		//car.addEventListener("click", infoEnd, false);
 	}
 }
 
@@ -66,10 +65,3 @@ function infoStart(event){
 	info.style.fontSize = "18px";
 	info.style.font = "bold";
 }
-
-/*
-function infoEnd(event){
-	var info = document.getElementById("passenger");
-	info.style.visibility = "hidden";
-}
-*/

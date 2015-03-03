@@ -7,6 +7,7 @@ import data.TransferSta;
 
 public class Calculate {
 	
+	//calculate congestion of each cars
 	public void calcCongestion(ArrayList<Station> sta){
 		double[] platform;
 		double[] transPlatform;
@@ -71,7 +72,7 @@ public class Calculate {
 		return temp;
 	}
 	
-	//arrange some passengers in the car
+	//moved some passengers in the car
 	public int[] modifyCars(int[] car){
 		for(int i = 0; i < 9; i++){
 			if(car[i] > car[i+1] + 30){
