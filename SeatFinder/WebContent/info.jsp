@@ -77,31 +77,41 @@
 		int[] train = main.getTrainCongestion(sta, staNum, hour);
 		%>
 		
-		<div class="alert alert-success"><b><%=name %>역 <%=hour %>시</b> 하행열차 혼잡도입니다.</div>
-		</br>
-		<div id = "passenger"></div>
 		<table>
-			<tr>
-			<%
-			for(int i = 0; i < 10; i++){
-				String id = "" + i;
-				if(train[i] < 50){
-				%>
-					<td><img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width=80></td>
-				<%continue;}
-				if(train[i] >= 50 && train[i] < 100){
-				%>
-					<td><img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width=80></td>
-				<%continue;}
-				if(train[i] >= 100){
-				%>
-					<td><img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width=80></td>
-				<%}
-			}%>
-		</tr>
-	</table>
-	</br></br>
-	<div class="alert alert-danger"> 열차 그림을 클릭하시면 각 열차 칸의 정보를 볼 수 있습니다.</div>
+    	<tr>
+    		<td>
+    			<div class="panel panel-success">
+			        <div class="panel-heading">
+			          <h2 class="panel-title"><b><%=name %>역 <%=hour %>시</b> 하행열차 혼잡도입니다.</h2>
+			        </div>
+			        <div class="panel-body">
+			        <table>
+						<div id = "passenger"></div>
+							<tr>
+							<%
+							for(int i = 0; i < 10; i++){
+								String id = "" + i;
+								if(train[i] < 50){
+								%>
+									<td><img src = "img/green.jpg" id = <%=id %> name = <%=train[i]%> width=80 data-container="body" data-toggle="popover" data-placement="bottom"></td>
+								<%continue;}
+								if(train[i] >= 50 && train[i] < 100){
+								%>
+									<td><img src = "img/yellow.jpg" id = <%=id %> name = <%=train[i]%> width=80 data-container="body" data-toggle="popover" data-placement="bottom"></td>
+								<%continue;}
+								if(train[i] >= 100){
+								%>
+									<td><img src = "img/red.jpg" id = <%=id %> name = <%=train[i]%> width=80 data-container="body" data-toggle="popover" data-placement="bottom"></td>
+								<%}
+							}%>
+						</tr>
+					</table></br>
+			          <div class="alert alert-danger"> 열차 그림을 클릭하시면 각 열차 칸의 정보를 볼 수 있습니다.</div>
+			        </div>
+      			</div>
+    		</td>
+    	</tr>
+    </table>
     </div><!-- /.container -->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

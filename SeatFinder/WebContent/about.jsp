@@ -47,10 +47,10 @@
     <div class="container">
         <img src="img/profile.png" width=180 class="img-rounded">
         <address>
-		  <h4>SeatFinder</h4></br>
+		  <h3>SeatFinder</h3></br>
 		  Project Manager : RENESYS</br>
 		  
-		  E-mail  : <a href="hrs350x@naver.com">hrs350x@naver.com</a>
+		  E-mail  : hrs350x@naver.com</br>
 		</address>
     </div><!-- /.container -->
 

@@ -44,7 +44,8 @@ function fillForm(){
 	image.src = "img/sta/"+ this.id +".png";
 }
 
-function showCarInfo(){
+function showCarInfo(event){
+	
 	for(var i = 0; i < 10; i++){
 		var car = document.getElementById(""+i);
 		car.addEventListener("click", infoStart, false);
@@ -52,16 +53,8 @@ function showCarInfo(){
 }
 
 function infoStart(event){
-	var info = document.getElementById("passenger");
-	info.style.visibility = "visible";
-	info.innerHTML = "현재 열차 : " + (Number(this.id) + 1) + "량</br>예상 승객 수 : " + this.name;
-	
-	info.style.position = "absolute";
-	info.style.left = event.x + "px";
-	info.style.top = event.y + "px";
-	info.style.border = "solid #0066ff";
-	info.style.backgroundColor = "#cccccc";
-	info.style.color = "#0066ff";
-	info.style.fontSize = "18px";
-	info.style.font = "bold";
+	$('img').popover('hide');
+	$('img').attr('data-original-title', "현재 열차 : " + (Number(this.id) + 1) + "량");
+	$('img').attr('data-content', "예상 승객 수 : " + this.name);
 }
+
