@@ -10,4 +10,4 @@ The web page provides prediction of train cars congestion from the data of passe
 </t></t>Open Source : json-simple, Bootstrap<br>
 </t></t>Server : Amazon Web Service - EC2 & Elastic Beanstalk(Tomcat)
 
-- URL : http://seatfinder.elasticbeanstalk.com/
+- URL : http://busanalyzer.ap-northeast-1.elasticbeanstalk.com/
